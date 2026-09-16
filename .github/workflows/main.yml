@@ -24,5 +24,21 @@ jobs:
           LETTERBOXD_USERNAME: ${{ secrets.LETTERBOXD_USERNAME }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: |
-                 run: python notion.py
-
+          python -c '
+          import os, requests
+          from bs4 import BeautifulSoup
+          
+          TOKEN_V3 = os.environ.get("TOKEN_V3")
+          DATABASE_ID = os.environ.get("DATABASE_ID")
+          LETTERBOXD_USERNAME = os.environ.get("LETTERBOXD_USERNAME")
+          
+          print(f"Buscando el diario de: {LETTERBOXD_USERNAME}")
+          url = f"https://letterboxd.com{LETTERBOXD_USERNAME}/rss/"
+          res = requests.get(url)
+          if res.status_code != 200:
+              print("Error al leer Letterboxd")
+          else:
+              soup = BeautifulSoup(res.content, "xml")
+              items = soup.find_all("item")
+              print(f"¡Éxito! Se han encontrado {len(items)} películas recientes.")
+          '
