@@ -23,8 +23,6 @@ jobs:
           DATABASE_ID: ${{ secrets.DATABASE_ID }}
           LETTERBOXD_USERNAME: ${{ secrets.LETTERBOXD_USERNAME }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-                  run: |
+        run: |
           curl -sS https://githubusercontent.com -o notion.py
           python notion.py
-
-
