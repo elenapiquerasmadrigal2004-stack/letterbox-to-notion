@@ -18,19 +18,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4
       - name: run script
-        env:
-          TOKEN_V3: ${{ secrets.TOKEN_V3 }}
-          DATABASE_ID: ${{ secrets.DATABASE_ID }}
-          LETTERBOXD_USERNAME: ${{ secrets.LETTERBOXD_USERNAME }}
-          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: |
           python -c '
           import os, requests
           from bs4 import BeautifulSoup
           
-          TOKEN_V3 = os.environ.get("TOKEN_V3")
-          DATABASE_ID = os.environ.get("DATABASE_ID")
-          LETTERBOXD_USERNAME = os.environ.get("LETTERBOXD_USERNAME")
+          LETTERBOXD_USERNAME = lenust
           
           print(f"Buscando el diario de: {LETTERBOXD_USERNAME}")
           url = f"https://letterboxd.com{LETTERBOXD_USERNAME}/rss/"
